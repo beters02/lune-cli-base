@@ -1,13 +1,13 @@
 local iam
 
 iam = {
-    callback = function(args)
+    callback = function(args, options)
         -- args[1] is always the command.
         -- your actualy command arguments start at args[2]
         local firstName = args[2]
         local lastName = args[3] or ""
 
-        if not firstName then
+        if not firstName and not options["n"] then
             print("iam command must have a first name!")
             return
         end
@@ -20,6 +20,7 @@ iam = {
     -- the arg table contains strings which could be options, or types
     args = {firstName = {"yourFirstName", "string"}, lastName = {"yourLastName", "string"}},
     argsorder = {"firstName", "lastName"},
+    options = {n = "Allow for no first name"},
     example = "iam Foo Bar"
 }
 

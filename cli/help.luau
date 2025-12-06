@@ -41,7 +41,7 @@ local function printCommandInfo(commandName, commandObj)
     
     -- start print usage (args)
     local argsamnt = 0
-    local usg = formatKeyName("usage")..": " .. formatCommandName(i)
+    local usg = formatKeyName("usage")..": " .. formatCommandName(i).." ["..formatOptionName("-options").."]"
 
     -- make sure args are in right order
     local argsorder = v.argsorder
@@ -81,8 +81,19 @@ local function printCommandInfo(commandName, commandObj)
         end
     end
 
-    -- print args and options
+    -- print args and arg options
     print(usg)
+
+    -- print all command options
+    if v.options and #v.options >= 1 then
+        local optstr = ""
+        for optname, optdesc in pairs(v.options) do
+            optstr=optstr.."\n"
+            optstr=formatArgumentName(optname)..": "..formatDescription(optdesc)
+        end
+        print("\n")
+        print(formatKeyName("options: ")..optstr)
+    end
 
     -- start print example if necessary
     if argsamnt > 0 then
@@ -145,6 +156,7 @@ help.printOrder = {}
 -- OPTIONAL PROPERTIES AND METHODS
 
 --argsorder = {} -- only for command with args
+--options = {} -- add options like -o
 
 help.init = function(commands, printOrder)
     help.commands = copyTblNoFunctions(commands)
