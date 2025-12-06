@@ -1,9 +1,12 @@
 local process = require("@lune/process")
 local commands = require("./commands")
+local color = require("../color")
 
 local args = process.args
-if args[1] == nil or not commands[args[1]] then
+if args[1] == nil then
     commands.help.callback()
+elseif not commands[args[1]] then
+    print(color.colorln("r", "Command " .. args[1] .. " does not exist. Run the help command to list all commands."))
 else
     -- get options
     local newArgs = {}
