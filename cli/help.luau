@@ -144,13 +144,16 @@ help.printOrder = {}
 
 -- OPTIONAL PROPERTIES AND METHODS
 
+--argsorder = {} -- only for command with args
+
 help.init = function(commands, printOrder)
     help.commands = copyTblNoFunctions(commands)
     help.printOrder = printOrder
 end
 
--- NEEDED PROPERTIES AND METHODS FOR ALL COMMANDS
+-- NEEDED PROPERTIES AND METHODS
 
+-- example = "push linux all game" -- only for commands with args
 help.description = "List all commands"
 help.args = {}
 help.callback = function()

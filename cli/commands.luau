@@ -3,9 +3,9 @@
 local commands = {}
 local help = require("./help")
 
--- init help with command info (to avoid recursive requires)
--- always do this last
 commands.help = help
+
+-- if you need to init a command for any reason, do this here.
 help.init(commands, {"help"}) -- add list order secondly
 
 return commands
